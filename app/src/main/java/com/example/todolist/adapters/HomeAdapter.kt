@@ -9,10 +9,18 @@ import com.example.todolist.base.BaseRecyclerViewAdapter
 import com.example.todolist.base.BaseViewHolder
 import com.example.todolist.databinding.ItemHomeBinding
 
-class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent>(){
+class HomeAdapter : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent>(){
 
     inner class ViewHolder(var binding: ItemHomeBinding):BaseViewHolder<ListParent>(binding.root){
         override fun onBind(item: ListParent, position: Int) {
+
+            binding.apply {
+
+                txtSerial.text = (position+1).toString()
+                txtTitle.text = item.name
+                txtDescription.text = item.description
+
+            }
 
         }
 

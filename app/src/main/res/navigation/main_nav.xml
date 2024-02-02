@@ -10,6 +10,24 @@
         android:name="com.example.todolist.ui.fragment.FragmentHome"
         android:label="FragmentHome"
         tools:layout="@layout/fragment_home"
+        >
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentAddNew"
+            app:destination="@id/fragmentAddNew" />
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentDetails"
+            app:destination="@id/fragmentDetails" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddNew"
+        android:name="com.example.todolist.ui.fragment.FragmentAddNew"
+        android:label="FragmentAddNew"
+        tools:layout="@layout/fragment_add_new"
         />
+    <fragment
+        android:id="@+id/fragmentDetails"
+        android:name="com.example.todolist.ui.fragment.FragmentDetails"
+        android:label="FragmentDetails"
+        tools:layout="@layout/fragment_details" />
 
 </navigation>
