@@ -7,4 +7,10 @@ object Enums {
     }
 
 
+    enum class RESPONSE (key:Int){
+        SUCCESS(200),
+        FAILURE(400)
+    }
+
+
 }

@@ -54,28 +54,28 @@ class FragmentDetails : BaseFragment() {
             DetailItem(
                 1,
                 "Home Tasks",
-                Enums.STATUS.ACTIVE
+                Enums.STATUS.ACTIVE.name
             )
         )
         homeList.add(
             DetailItem(
                 2,
                 "Office Tasks",
-                Enums.STATUS.ACTIVE
+                Enums.STATUS.ACTIVE.name
             )
         )
         homeList.add(
             DetailItem(
                 3,
                 "Friends Tasks",
-                Enums.STATUS.ACTIVE
+                Enums.STATUS.ACTIVE.name
             )
         )
         homeList.add(
             DetailItem(
                 4,
                 "Learning Tasks",
-                Enums.STATUS.ACTIVE
+                Enums.STATUS.ACTIVE.name
             )
         )
         return homeList;
