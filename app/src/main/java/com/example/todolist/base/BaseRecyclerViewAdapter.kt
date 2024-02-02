@@ -5,7 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseAdapter<H : BaseViewHolder<M>, M> : RecyclerView.Adapter<H>() {
+abstract class BaseRecyclerViewAdapter<H : BaseViewHolder<M>, M> : RecyclerView.Adapter<H>() {
 
     var listItems: ArrayList<M> = arrayListOf()
         set(value) = run {
