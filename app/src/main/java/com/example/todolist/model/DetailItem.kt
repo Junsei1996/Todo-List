@@ -7,6 +7,7 @@ import com.example.todolist.util.Enums
 @Entity(tableName = "detail_item")
 data class DetailItem(
     @PrimaryKey(autoGenerate = true) var id:Int = 0,
+    var parentId: Int,
     var name:String,
     var status: String
 )
