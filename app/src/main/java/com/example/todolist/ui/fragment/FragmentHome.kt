@@ -1,6 +1,8 @@
 package com.example.todolist.ui.fragment
 
 import android.os.Bundle
+import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -82,6 +84,9 @@ class FragmentHome : BaseFragment() {
 
             btnAdd.setOnClickListener {
                 findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddNew)
+
+//                var addNew = FragmentAddNew()
+//                addNew.show(childFragmentManager, "ADD_NEW_TASK")
             }
 
         }

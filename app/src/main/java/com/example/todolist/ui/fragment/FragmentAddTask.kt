@@ -3,13 +3,13 @@ package com.example.todolist.ui.fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
-import com.example.todolist.base.BaseFragment
+import com.example.todolist.base.BaseBottomSheetFragment
 import com.example.todolist.databinding.FragmentAddTaskBinding
 import com.example.todolist.model.DetailItem
 import com.example.todolist.util.Enums
 import com.example.todolist.viewModel.HomeViewModel
 
-class FragmentAddTask : BaseFragment() {
+class FragmentAddTask : BaseBottomSheetFragment() {
 
     private lateinit var mBinding: FragmentAddTaskBinding;
     private val viewModel: HomeViewModel by viewModels {

@@ -18,7 +18,7 @@
             android:id="@+id/action_fragmentHome_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/fragmentAddNew"
         android:name="com.example.todolist.ui.fragment.FragmentAddNew"
         android:label="FragmentAddNew"
@@ -33,7 +33,7 @@
             android:id="@+id/action_fragmentDetails_to_fragmentAddTask"
             app:destination="@id/fragmentAddTask" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/fragmentAddTask"
         android:name="com.example.todolist.ui.fragment.FragmentAddTask"
         android:label="FragmentAddTask"
