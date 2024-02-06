@@ -1,7 +1,7 @@
 package com.example.todolist.ui.fragment
 
-import android.view.View
-import android.widget.Toast
+import android.os.Bundle
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.R
@@ -10,28 +10,64 @@ import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentHomeBinding
 import com.example.todolist.model.ListParent
 import com.example.todolist.util.Enums
-import java.util.ArrayList
+import com.example.todolist.util.HomeCompleteListener
+import com.example.todolist.viewModel.HomeViewModel
+import kotlin.collections.ArrayList
 
 class FragmentHome : BaseFragment() {
 
     lateinit var mBinding: FragmentHomeBinding;
     lateinit var adapter: HomeAdapter
+    private val viewModel: HomeViewModel by viewModels {
+        HomeViewModel.HomeViewModelFactory()
+    }
+
     override fun init() {
 
         mBinding.apply {
 
-            adapter = HomeAdapter();
-            adapter.listItems = getListItems();
+            adapter = HomeAdapter(object: HomeCompleteListener{
+                override fun onComplete(item: ListParent) {
+                    updateFile(item, Enums.STATUS.COMPLETED.name)
+                }
+
+                override fun onUncheck(item: ListParent) {
+                    updateFile(item, Enums.STATUS.ACTIVE.name)
+                }
+
+            });
             rvHome.adapter = adapter
             rvHome.layoutManager = LinearLayoutManager(requireContext())
 
             adapter.itemClickListener = {
-                findNavController().navigate(R.id.action_fragmentHome_to_fragmentDetails)
+                var bundle = Bundle();
+                bundle.putInt(Enums.BUNDLE_KEYS.FILE_ID.name,it.id)
+                bundle.putParcelable(Enums.BUNDLE_KEYS.PARENT_FILE.name, it)
+                findNavController().navigate(R.id.action_fragmentHome_to_fragmentDetails, bundle)
             }
 
         }
 
+        getFiles()
+
     }
+
+    private fun getFiles() {
+        viewModel.getItems().observe(this){
+            if(!it.isNullOrEmpty()){
+                setListItems(it)
+            }
+        }
+    }
+
+    private fun updateFile(item: ListParent, status: String) {
+
+        viewModel.updateFile(item.id, status).observe(this){
+            getFiles()
+        }
+
+    }
+
     override fun getFragmentLayout(): Int = R.layout.fragment_home
 
     override fun getViewModel() {
@@ -51,43 +87,10 @@ class FragmentHome : BaseFragment() {
         }
 
     }
-    private fun getListItems(): ArrayList<ListParent> {
+    private fun setListItems(arrayList: ArrayList<ListParent>) {
 
-        var homeList = arrayListOf<ListParent>()
-
-        homeList.add(
-            ListParent(
-                1,
-                "Home Tasks",
-                "List of tasks you have to do at home",
-                Enums.STATUS.ACTIVE
-            )
-        )
-        homeList.add(
-            ListParent(
-                2,
-                "Office Tasks",
-                "List of tasks you have to do at office",
-                Enums.STATUS.ACTIVE
-            )
-        )
-        homeList.add(
-            ListParent(
-                3,
-                "Friends Tasks",
-                "List of tasks you have to do with friends",
-                Enums.STATUS.ACTIVE
-            )
-        )
-        homeList.add(
-            ListParent(
-                4,
-                "Learning Tasks",
-                "List of tasks you have to do to Learn",
-                Enums.STATUS.ACTIVE
-            )
-        )
-        return homeList;
+        adapter.listItems = arrayList
+        adapter.notifyDataSetChanged()
 
     }
 }

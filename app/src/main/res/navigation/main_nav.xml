@@ -28,6 +28,16 @@
         android:id="@+id/fragmentDetails"
         android:name="com.example.todolist.ui.fragment.FragmentDetails"
         android:label="FragmentDetails"
-        tools:layout="@layout/fragment_details" />
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_fragmentDetails_to_fragmentAddTask"
+            app:destination="@id/fragmentAddTask" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddTask"
+        android:name="com.example.todolist.ui.fragment.FragmentAddTask"
+        android:label="FragmentAddTask"
+        android:layout="@layout/fragment_add_task"
+        />
 
 </navigation>
