@@ -9,4 +9,26 @@
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#A6A5A5</color>
     <color name="green">#D1FFBD</color>
+
+<!--    Pallete 1-->
+    <color name="vivid_sky_blue_dark">#49C6E5</color>
+    <color name="vivid_sky_blue_light">#54DEFD</color>
+    <color name="snow">#FFFBFA</color>
+    <color name="mint">#00BD9D</color>
+    <color name="tiffany_blue">#8BD7D2</color>
+
+<!--    Pallete 2-->
+    <color name="space_cadet">#1F2041</color>
+    <color name="english_violet">#4B3F72</color>
+    <color name="sun_glow">#FFC857</color>
+    <color name="dark_cyan">#119DA4</color>
+    <color name="payne_gray">#19647E</color>
+
+<!--    Pallete 3-->
+    <color name="ash_gray">#BAC1B8</color>
+    <color name="moonstone">#58A4BO</color>
+    <color name="dark_spring_green">#0C7C59</color>
+    <color name="gunmetal">#2B303A</color>
+    <color name="chili_red">#D64933</color>
+
 </resources>

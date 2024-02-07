@@ -32,22 +32,21 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
                 txtDescription.text = item.description
 
                 if (item.status == Enums.STATUS.COMPLETED.name) {
-                    container.setBackgroundColor(
+                    container.setCardBackgroundColor(
                         ContextCompat.getColor(
                             binding.root.context,
                             R.color.green
                         )
                     )
                     cbComplete.isChecked = true
-                }else{
-                    container.setBackgroundColor(
+                } else {
+                    container.setCardBackgroundColor(
                         ContextCompat.getColor(
                             binding.root.context,
                             R.color.white
                         )
                     )
                 }
-
                 cbComplete.setOnCheckedChangeListener { compoundButton, checked ->
                     if (checked) {
                         completeListener.onComplete(item)
