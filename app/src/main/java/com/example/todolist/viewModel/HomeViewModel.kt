@@ -36,7 +36,7 @@ class HomeViewModel(): ViewModel() {
     }
 
     fun deleteTask(taskId:Int) = liveData {
-        val result = DataRepository.getTasks(taskId)
+        val result = DataRepository.deleteTask(taskId)
         emit(result)
     }
 

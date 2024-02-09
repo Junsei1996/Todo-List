@@ -7,4 +7,6 @@ interface TaskListener {
     fun onComplete(item: DetailItem)
     fun onUncheck(item: DetailItem)
 
+    fun onDelete(item:DetailItem)
+
 }

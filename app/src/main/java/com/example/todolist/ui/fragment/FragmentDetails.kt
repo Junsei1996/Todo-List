@@ -1,6 +1,7 @@
 package com.example.todolist.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,6 +12,7 @@ import com.example.todolist.databinding.FragmentDetailsBinding
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
 import com.example.todolist.util.Enums
+import com.example.todolist.util.OnAddedListener
 import com.example.todolist.util.TaskListener
 import com.example.todolist.viewModel.HomeViewModel
 
@@ -50,6 +52,10 @@ class FragmentDetails : BaseFragment() {
                     updateTask(item, Enums.STATUS.ACTIVE.name)
                 }
 
+                override fun onDelete(item: DetailItem) {
+                    deleteTask(item)
+                }
+
             })
             detailAdapter.listItems = getData()
             rvItems.adapter = detailAdapter
@@ -64,7 +70,10 @@ class FragmentDetails : BaseFragment() {
     private fun getTasks() {
         viewModel.getTasks(parentId).observe(this){
             if(!it.isNullOrEmpty()){
+                showEmptyState(false)
                 setListItems(it)
+            }else{
+                showEmptyState(true)
             }
         }
     }
@@ -90,7 +99,9 @@ class FragmentDetails : BaseFragment() {
     override fun setListeners() {
         mBinding.apply {
             btnComplete.setOnClickListener {
-
+                viewModel.updateFile(parentId, Enums.STATUS.COMPLETED.name).observe(this@FragmentDetails){
+                    findNavController().navigateUp()
+                }
             }
             btnDelete.setOnClickListener {
                 deleteItem()
@@ -98,7 +109,15 @@ class FragmentDetails : BaseFragment() {
             btnAddTask.setOnClickListener {
                 var bundle = Bundle()
                 bundle.putInt(Enums.BUNDLE_KEYS.FILE_ID.name, parentId)
-                findNavController().navigate(R.id.action_fragmentDetails_to_fragmentAddTask, bundle)
+//                findNavController().navigate(R.id.action_fragmentDetails_to_fragmentAddTask, bundle)
+
+                var addNew = FragmentAddTask(parentId, object: OnAddedListener {
+                    override fun parentOrTaskAdded() {
+                        getTasks()
+                    }
+                })
+                addNew.show(childFragmentManager, "ADD_NEW_TASK")
+
             }
         }
     }
@@ -114,10 +133,28 @@ class FragmentDetails : BaseFragment() {
         }
     }
 
+    private fun deleteTask(item: DetailItem) {
+        viewModel.deleteTask(item.id).observe(this){
+            getTasks()
+        }
+    }
+
     private fun setListItems(arrayList: ArrayList<DetailItem>) {
 
         detailAdapter.listItems = arrayList
         detailAdapter.notifyDataSetChanged()
+
+    }
+
+    private fun showEmptyState(show: Boolean){
+
+        if(show){
+            mBinding.clEmptyState.visibility = View.VISIBLE
+            mBinding.rvItems.visibility = View.GONE
+        }else{
+            mBinding.clEmptyState.visibility = View.GONE
+            mBinding.rvItems.visibility = View.VISIBLE
+        }
 
     }
 

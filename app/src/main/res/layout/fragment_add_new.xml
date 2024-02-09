@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="12dp"
-        >
+        android:padding="12dp">
 
         <TextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
             android:text="@string/add_new_item"
+            android:textColor="@color/space_cadet"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -24,59 +25,90 @@
             android:id="@+id/et_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_title"
-            android:hint="title"
             android:layout_marginVertical="12dp"
-
+            android:hint="@string/title"
+            android:textColor="@color/space_cadet"
+            android:fontFamily="@font/montserrat_medium"
+            android:backgroundTint="@color/space_cadet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:textCursorDrawable="@drawable/color_cursor"
             />
 
         <EditText
             android:id="@+id/et_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_title"
-            android:hint="description"
             android:layout_marginVertical="12dp"
+            android:hint="@string/description"
+            android:textColor="@color/space_cadet"
+            android:fontFamily="@font/montserrat_medium"
+            android:backgroundTint="@color/space_cadet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_title"
+            android:textCursorDrawable="@drawable/color_cursor"
             />
 
         <EditText
             android:id="@+id/et_deadline"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginVertical="12dp"
+            android:hint="@string/deadline"
+            android:textColor="@color/space_cadet"
+            android:fontFamily="@font/montserrat_medium"
+            android:backgroundTint="@color/space_cadet"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_description"
+            android:textCursorDrawable="@drawable/color_cursor"
+            />
+
+        <TextView
+            android:id="@+id/tv_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_bold"
+            android:text="Please fill all the fields"
+            android:textColor="@color/chili_red"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/et_deadline"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_description"
-            android:hint="deadline"
-            android:layout_marginVertical="12dp"
             />
 
         <Button
             android:id="@+id/btn_save"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/et_deadline"
-            app:layout_constraintEnd_toStartOf="@id/btn_cancel"
-            android:text="save"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="12dp"
-            />
+            android:backgroundTint="@color/space_cadet"
+            android:text="@string/save"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_medium"
+            app:layout_constraintEnd_toStartOf="@id/btn_cancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_error" />
 
         <Button
             android:id="@+id/btn_cancel"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_deadline"
-            app:layout_constraintStart_toEndOf="@id/btn_save"
-            android:text="cancel"
             android:layout_marginHorizontal="8dp"
             android:layout_marginVertical="12dp"
-            />
+            android:backgroundTint="@color/chili_red"
+            android:text="@string/cancel"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_save"
+            app:layout_constraintTop_toBottomOf="@+id/tv_error" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

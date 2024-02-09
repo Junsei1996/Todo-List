@@ -60,6 +60,10 @@ class DetailsAdapter() : BaseRecyclerViewAdapter<DetailsAdapter.ViewHolder, Deta
                     )
                 }
 
+                btnDeleteItem.setOnClickListener {
+                    taskListener.onDelete(item)
+                }
+
                 cbComplete.setOnCheckedChangeListener { compoundButton, checked ->
                     if (checked) {
                         taskListener.onComplete(item)

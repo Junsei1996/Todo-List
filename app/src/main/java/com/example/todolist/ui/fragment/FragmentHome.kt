@@ -1,6 +1,7 @@
 package com.example.todolist.ui.fragment
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
@@ -13,6 +14,7 @@ import com.example.todolist.databinding.FragmentHomeBinding
 import com.example.todolist.model.ListParent
 import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
+import com.example.todolist.util.OnAddedListener
 import com.example.todolist.viewModel.HomeViewModel
 import kotlin.collections.ArrayList
 
@@ -57,7 +59,10 @@ class FragmentHome : BaseFragment() {
     private fun getFiles() {
         viewModel.getItems().observe(this){
             if(!it.isNullOrEmpty()){
+                showEmptyState(false)
                 setListItems(it)
+            }else{
+                showEmptyState(true)
             }
         }
     }
@@ -83,10 +88,14 @@ class FragmentHome : BaseFragment() {
         mBinding.apply {
 
             btnAdd.setOnClickListener {
-                findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddNew)
+//                findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddNew)
 
-//                var addNew = FragmentAddNew()
-//                addNew.show(childFragmentManager, "ADD_NEW_TASK")
+                var addNew = FragmentAddNew(object:OnAddedListener{
+                    override fun parentOrTaskAdded() {
+                        getFiles()
+                    }
+                })
+                addNew.show(childFragmentManager, "ADD_NEW_TASK")
             }
 
         }
@@ -98,4 +107,18 @@ class FragmentHome : BaseFragment() {
         adapter.notifyDataSetChanged()
 
     }
+
+
+    private fun showEmptyState(show: Boolean){
+
+        if(show){
+            mBinding.clEmptyState.visibility = View.VISIBLE
+            mBinding.rvHome.visibility = View.GONE
+        }else{
+            mBinding.clEmptyState.visibility = View.GONE
+            mBinding.rvHome.visibility = View.VISIBLE
+        }
+
+    }
+
 }

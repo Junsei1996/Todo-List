@@ -27,7 +27,7 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
 
             binding.apply {
 
-                txtSerial.text = (position + 1).toString()
+//                txtSerial.text = (position + 1).toString()
                 txtTitle.text = item.name
                 txtDescription.text = item.description
 
