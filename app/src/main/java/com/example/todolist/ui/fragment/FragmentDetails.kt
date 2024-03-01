@@ -2,6 +2,7 @@ package com.example.todolist.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -11,9 +12,11 @@ import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentDetailsBinding
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
+import com.example.todolist.util.AlertDialogListener
 import com.example.todolist.util.Enums
 import com.example.todolist.util.OnAddedListener
 import com.example.todolist.util.TaskListener
+import com.example.todolist.util.UtilityFunctions
 import com.example.todolist.viewModel.HomeViewModel
 
 class FragmentDetails : BaseFragment() {
@@ -128,15 +131,29 @@ class FragmentDetails : BaseFragment() {
     }
 
     private fun deleteItem(){
-        viewModel.deleteItem(parentId).observe(this){
-            findNavController().navigateUp()
-        }
+        UtilityFunctions.showAlertDialog(requireContext(), "Are you sure you want to delete the File?","All tasks liked to file will be deleted.", object:AlertDialogListener{
+            override fun onAccept() {
+                viewModel.deleteItem(parentId).observe(this@FragmentDetails){
+                    findNavController().navigateUp()
+                }
+            }
+
+            override fun onReject() {
+            }
+        })
     }
 
     private fun deleteTask(item: DetailItem) {
-        viewModel.deleteTask(item.id).observe(this){
-            getTasks()
-        }
+        UtilityFunctions.showAlertDialog(requireContext(), "Are you sure you want to delete the task?","Once deleted the task can not be recovered.", object:AlertDialogListener{
+            override fun onAccept() {
+                viewModel.deleteTask(item.id).observe(this@FragmentDetails){
+                    getTasks()
+                }
+            }
+
+            override fun onReject() {
+            }
+        })
     }
 
     private fun setListItems(arrayList: ArrayList<DetailItem>) {
