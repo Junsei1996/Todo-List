@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -8,16 +7,18 @@
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
         app:cardElevation="5dp">
-        
-        <com.example.todolist.util.SwipeRevealLayout
+
+        <com.chauthai.swipereveallayout.SwipeRevealLayout
+            android:id="@+id/swipelayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
-            <FrameLayout
+            android:layout_height="wrap_content"
+            app:dragEdge="right"
+            app:mode="same_level">
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                >
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -28,21 +29,25 @@
                         android:id="@+id/btn_delete_item"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:backgroundTint="@color/chili_red"
+                        android:fontFamily="@font/montserrat_medium"
                         android:text="@string/delete"
                         android:textColor="@color/white"
-                        android:fontFamily="@font/montserrat_medium"
-                        android:backgroundTint="@color/chili_red"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
 
-            </FrameLayout>
-            <FrameLayout
+
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                >
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/container"
@@ -51,55 +56,36 @@
                     android:padding="5dp">
 
                     <TextView
-                        android:id="@+id/txt_serial"
-                        android:layout_width="wrap_content"
-                        android:layout_height="0dp"
-                        android:layout_marginHorizontal="8dp"
-                        android:gravity="center_vertical"
-                        android:text="@string/number"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:textColor="@color/space_cadet"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@id/txt_title"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                    <TextView
                         android:id="@+id/txt_title"
                         android:layout_width="0dp"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:fontFamily="@font/montserrat_regular"
                         android:gravity="center_vertical"
                         android:text="@string/title"
+                        android:textColor="@color/space_cadet"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:ellipsize="end"
-                        android:textColor="@color/space_cadet"
-                        android:fontFamily="@font/montserrat_regular"
+                        android:layout_marginHorizontal="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/cb_complete"
-                        app:layout_constraintStart_toEndOf="@id/txt_serial"
+                        app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <CheckBox
                         android:id="@+id/cb_complete"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
                         android:buttonTint="@color/payne_gray"
-                        />
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-                
-            </FrameLayout>
+            </LinearLayout>
+        </com.chauthai.swipereveallayout.SwipeRevealLayout>
 
-            
-        </com.example.todolist.util.SwipeRevealLayout>
-
-        
 
     </androidx.cardview.widget.CardView>
-
 </layout>

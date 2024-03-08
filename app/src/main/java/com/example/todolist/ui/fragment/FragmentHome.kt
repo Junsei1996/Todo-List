@@ -3,7 +3,6 @@ package com.example.todolist.ui.fragment
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -29,13 +28,14 @@ class FragmentHome : BaseFragment() {
     override fun init() {
 
         mBinding.apply {
-
             adapter = HomeAdapter(object: HomeCompleteListener{
                 override fun onComplete(item: ListParent) {
+                    Toast.makeText(requireContext(), "On Complete = "+item.id+" "+item.name, Toast.LENGTH_SHORT).show()
                     updateFile(item, Enums.STATUS.COMPLETED.name)
                 }
 
                 override fun onUncheck(item: ListParent) {
+                    Toast.makeText(requireContext(), "On UnCheck = "+item.id+" "+item.name, Toast.LENGTH_SHORT).show()
                     updateFile(item, Enums.STATUS.ACTIVE.name)
                 }
 
