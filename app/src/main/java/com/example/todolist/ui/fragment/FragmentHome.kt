@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todolist.R
@@ -15,6 +16,9 @@ import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
 import com.example.todolist.util.OnAddedListener
 import com.example.todolist.viewModel.HomeViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.collections.ArrayList
 
 class FragmentHome : BaseFragment() {
@@ -57,12 +61,14 @@ class FragmentHome : BaseFragment() {
     }
 
     private fun getFiles() {
-        viewModel.getItems().observe(this){
-            if(!it.isNullOrEmpty()){
-                showEmptyState(false)
-                setListItems(it)
-            }else{
-                showEmptyState(true)
+        CoroutineScope(Dispatchers.IO).launch {
+            viewModel.getItems().observe(this@FragmentHome){
+                if(!it.isNullOrEmpty()){
+                    showEmptyState(false)
+                    setListItems(it)
+                }else{
+                    showEmptyState(true)
+                }
             }
         }
     }
