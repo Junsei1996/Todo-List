@@ -1,5 +1,6 @@
 package com.example.todolist.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
@@ -12,7 +13,7 @@ interface FilesDao {
     fun insertFile(file: ListParent);
 
     @Query("Select * from files_table ORDER BY id")
-    fun getFiles(): List<ListParent>
+    fun getFiles(): Flow<List<ListParent>>
 
     @Query("UPDATE files_table SET status = :status WHERE id = :fileId")
     fun updateFile(fileId: Int, status: String)

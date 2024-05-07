@@ -1,9 +1,11 @@
 package com.example.todolist.database
 
+import androidx.lifecycle.LiveData
 import com.example.todolist.TodoApplication
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
-import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
+import java.util.concurrent.Flow
 
 object DataRepository {
 
@@ -11,8 +13,8 @@ object DataRepository {
         TodoApplication.database.filesDao().insertFile(item)
     }
 
-    fun getItems(): ArrayList<ListParent> {
-        return TodoApplication.database.filesDao().getFiles() as ArrayList<ListParent>
+    fun getItems() = flow {
+        emit(TodoApplication.database.filesDao().getFiles())
     }
 
     fun deleteItem(id: Int) {

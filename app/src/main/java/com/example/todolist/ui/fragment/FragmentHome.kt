@@ -61,14 +61,12 @@ class FragmentHome : BaseFragment() {
     }
 
     private fun getFiles() {
-        CoroutineScope(Dispatchers.IO).launch {
-            viewModel.getItems().observe(this@FragmentHome){
-                if(!it.isNullOrEmpty()){
-                    showEmptyState(false)
-                    setListItems(it)
-                }else{
-                    showEmptyState(true)
-                }
+        viewModel.getItems().observe(this@FragmentHome){
+            if(!it.isNullOrEmpty()){
+                showEmptyState(false)
+                setListItems(it as ArrayList<ListParent>)
+            }else{
+                showEmptyState(true)
             }
         }
     }
