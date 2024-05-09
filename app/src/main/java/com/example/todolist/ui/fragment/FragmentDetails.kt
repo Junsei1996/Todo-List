@@ -74,7 +74,7 @@ class FragmentDetails : BaseFragment() {
         viewModel.getTasks(parentId).observe(this){
             if(!it.isNullOrEmpty()){
                 showEmptyState(false)
-                setListItems(it)
+                setListItems(it as ArrayList<DetailItem>)
             }else{
                 showEmptyState(true)
             }

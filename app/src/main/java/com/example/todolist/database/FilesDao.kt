@@ -1,7 +1,9 @@
 package com.example.todolist.database
 
-import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
 import kotlinx.coroutines.flow.Flow
@@ -13,7 +15,7 @@ interface FilesDao {
     fun insertFile(file: ListParent);
 
     @Query("Select * from files_table ORDER BY id")
-    fun getFiles(): Flow<List<ListParent>>
+    fun getFiles(): Flow<MutableList<ListParent>>
 
     @Query("UPDATE files_table SET status = :status WHERE id = :fileId")
     fun updateFile(fileId: Int, status: String)
@@ -25,7 +27,7 @@ interface FilesDao {
     fun insertTask(task: DetailItem)
 
     @Query("Select * from detail_item where parentId = :fileId ORDER BY id")
-    fun getTasks(fileId: Int): List<DetailItem>
+    fun getTasks(fileId: Int): Flow<MutableList<DetailItem>>
 
     @Query("Delete from detail_item where id = :taskId")
     fun deleteTask(taskId: Int)

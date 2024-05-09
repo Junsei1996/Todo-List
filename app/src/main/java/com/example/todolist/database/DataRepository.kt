@@ -1,48 +1,64 @@
 package com.example.todolist.database
 
-import androidx.lifecycle.LiveData
 import com.example.todolist.TodoApplication
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
-import kotlinx.coroutines.flow.flow
-import java.util.concurrent.Flow
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.launch
 
 object DataRepository {
 
     fun addNewItem(item: ListParent) {
-        TodoApplication.database.filesDao().insertFile(item)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().insertFile(item)
+        }
     }
 
-    fun getItems() = flow {
-        emit(TodoApplication.database.filesDao().getFiles())
+    fun getItems(): Flow<MutableList<ListParent>> {
+        return TodoApplication.database.filesDao().getFiles()
     }
 
     fun deleteItem(id: Int) {
-        TodoApplication.database.filesDao().deleteFile(id)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().deleteFile(id)
+        }
     }
 
     fun addNewTask(item: DetailItem) {
-        TodoApplication.database.filesDao().insertTask(item)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().insertTask(item)
+        }
     }
 
-    fun getTasks(id: Int): ArrayList<DetailItem> {
-        return TodoApplication.database.filesDao().getTasks(id) as ArrayList<DetailItem>
+    fun getTasks(id: Int): Flow<MutableList<DetailItem>> {
+        return TodoApplication.database.filesDao().getTasks(id)
     }
 
     fun deleteTask(id: Int) {
-        TodoApplication.database.filesDao().deleteTask(id)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().deleteTask(id)
+        }
     }
 
     fun updateTask(taskId: Int, status: String) {
-        TodoApplication.database.filesDao().updateTask(taskId, status)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().updateTask(taskId, status)
+        }
     }
 
     fun updateFile(fileId: Int, status: String) {
-        TodoApplication.database.filesDao().updateFile(fileId, status)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().updateFile(fileId, status)
+        }
     }
 
     fun updateAllTasks(fileId: Int, status: String) {
-        TodoApplication.database.filesDao().updateAllTasks(fileId, status)
+        CoroutineScope(Dispatchers.IO).launch {
+            TodoApplication.database.filesDao().updateAllTasks(fileId, status)
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package com.example.todolist.viewModel
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.todolist.database.DataRepository
@@ -19,16 +20,9 @@ import kotlinx.coroutines.launch
 class HomeViewModel() : ViewModel() {
 
     fun getItems() = liveData {
-//        viewModelScope.launch {
-            DataRepository.getItems()
-//                .flowOn(Dispatchers.IO)
-                .catch { e ->
-                Log.d("", e.localizedMessage)
-                }
-                .collect {
-                    emit (it.single())
-                }
-//        }
+        DataRepository.getItems().collect { data ->
+            emit(data)
+        }
     }
 
     fun addItem(item: ListParent) = liveData {
@@ -47,8 +41,9 @@ class HomeViewModel() : ViewModel() {
     }
 
     fun getTasks(fileId: Int) = liveData {
-        val result = DataRepository.getTasks(fileId)
-        emit(result)
+        DataRepository.getTasks(fileId).collect { result ->
+            emit(result)
+        }
     }
 
     fun deleteTask(taskId: Int) = liveData {
