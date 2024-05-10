@@ -3,6 +3,7 @@ package com.example.todolist.database
 import com.example.todolist.TodoApplication
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
+import com.example.todolist.util.Enums
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -18,7 +19,11 @@ object DataRepository {
     }
 
     fun getItems(): Flow<MutableList<ListParent>> {
-        return TodoApplication.database.filesDao().getFiles()
+        return TodoApplication.database.filesDao().getFiles(Enums.STATUS.ACTIVE.name)
+    }
+
+    fun getHistory(): Flow<MutableList<ListParent>> {
+        return TodoApplication.database.filesDao().getHistory(Enums.STATUS.COMPLETED.name)
     }
 
     fun deleteItem(id: Int) {

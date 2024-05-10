@@ -1,7 +1,6 @@
 package com.example.todolist.ui.fragment
 
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
@@ -63,7 +62,8 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
     }
 
     fun verifyInputs(title:String, desc:String, deadline:String):Boolean{
-        return !(title.isNullOrEmpty() || desc.isNullOrEmpty() || deadline.isNullOrEmpty())
+        return !(title.isNullOrEmpty())
+//        return !(title.isNullOrEmpty() || desc.isNullOrEmpty() || deadline.isNullOrEmpty())
     }
 
     private fun saveItem() {
@@ -84,7 +84,6 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
             viewModel.addItem(item).observe(this) {
 
                 if(it == Enums.RESPONSE.SUCCESS){
-                    Toast.makeText(requireContext(), "Added", Toast.LENGTH_SHORT).show()
                     addedListener.parentOrTaskAdded()
 //                    findNavController().navigateUp()
                     dismiss()

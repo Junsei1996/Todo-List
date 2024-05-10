@@ -6,6 +6,7 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
+import com.example.todolist.util.Enums
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -14,8 +15,11 @@ interface FilesDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFile(file: ListParent);
 
-    @Query("Select * from files_table ORDER BY id")
-    fun getFiles(): Flow<MutableList<ListParent>>
+    @Query("Select * from files_table WHERE status = :stat ORDER BY id")
+    fun getFiles(stat: String): Flow<MutableList<ListParent>>
+
+    @Query("Select * from files_table WHERE status = :stat ORDER BY id")
+    fun getHistory(stat: String): Flow<MutableList<ListParent>>
 
     @Query("UPDATE files_table SET status = :status WHERE id = :fileId")
     fun updateFile(fileId: Int, status: String)

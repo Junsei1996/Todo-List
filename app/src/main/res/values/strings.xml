@@ -13,4 +13,5 @@
     <string name="delete">Delete</string>
     <string name="no_tasks_found">no tasks found</string>
     <string name="no_files_found">no files found</string>
+    <string name="history">History</string>
 </resources>

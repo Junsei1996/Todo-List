@@ -12,34 +12,16 @@
         tools:layout="@layout/fragment_home"
         >
         <action
-            android:id="@+id/action_fragmentHome_to_fragmentAddNew"
-            app:destination="@id/fragmentAddNew"
-            />
-        <action
             android:id="@+id/action_fragmentHome_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
     </fragment>
-    <dialog
-        android:id="@+id/fragmentAddNew"
-        android:name="com.example.todolist.ui.fragment.FragmentAddNew"
-        android:label="FragmentAddNew"
-        tools:layout="@layout/fragment_add_new"
-        />
     <fragment
         android:id="@+id/fragmentDetails"
         android:name="com.example.todolist.ui.fragment.FragmentDetails"
         android:label="FragmentDetails"
         tools:layout="@layout/fragment_details" >
-        <action
-            android:id="@+id/action_fragmentDetails_to_fragmentAddTask"
-            app:destination="@id/fragmentAddTask" />
     </fragment>
-    <dialog
-        android:id="@+id/fragmentAddTask"
-        android:name="com.example.todolist.ui.fragment.FragmentAddTask"
-        android:label="FragmentAddTask"
-        android:layout="@layout/fragment_add_task"
-        />
+
     <fragment
         android:id="@+id/fragmentParent"
         android:name="com.example.todolist.ui.fragment.FragmentParent"

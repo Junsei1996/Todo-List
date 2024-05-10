@@ -25,6 +25,12 @@ class HomeViewModel() : ViewModel() {
         }
     }
 
+    fun getHistory() = liveData {
+        DataRepository.getHistory().collect { data ->
+            emit(data)
+        }
+    }
+
     fun addItem(item: ListParent) = liveData {
         val result = DataRepository.addNewItem(item)
         emit(Enums.RESPONSE.SUCCESS)

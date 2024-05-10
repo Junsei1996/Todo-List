@@ -4,7 +4,6 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.example.todolist.model.ListParent
 import com.example.todolist.R
@@ -53,10 +52,8 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
                 cbComplete.setOnCheckedChangeListener { compoundButton, checked ->
                     if (checked) {
                         completeListener.onComplete(item)
-                        Toast.makeText(binding.root.context, "Checked", Toast.LENGTH_SHORT).show()
                     } else {
                         completeListener.onUncheck(item)
-                        Toast.makeText(binding.root.context, "Un_Checked", Toast.LENGTH_SHORT).show()
                     }
                 }
 
