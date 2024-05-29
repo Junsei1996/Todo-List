@@ -11,6 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TodoList">
         <activity
+            android:screenOrientation="portrait"
             android:name=".ui.activity.MainActivity"
             android:exported="true">
             <intent-filter>

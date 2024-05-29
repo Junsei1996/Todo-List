@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/fragmentParent">
+    app:startDestination="@id/fragmentHome">
 
     <fragment
         android:id="@+id/fragmentHome"
@@ -40,18 +40,6 @@
         android:label="FragmentAddTask"
         android:layout="@layout/fragment_add_task"
         />
-    <fragment
-        android:id="@+id/fragmentParent"
-        android:name="com.example.todolist.ui.fragment.FragmentParent"
-        android:label="FragmentParent"
-        tools:layout="@layout/fragment_parent">
-        <action
-            android:id="@+id/action_fragmentParent_to_fragmentHome"
-            app:destination="@id/fragmentHome" />
-        <action
-            android:id="@+id/action_fragmentParent_to_historyFragment"
-            app:destination="@id/historyFragment" />
-    </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.todolist.ui.fragment.FragmentHistory"

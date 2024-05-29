@@ -1,12 +1,17 @@
 package com.example.todolist.ui.fragment
 
 import android.view.View
+import android.widget.CompoundButton
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todolist.R
 import com.example.todolist.base.BaseBottomSheetFragment
 import com.example.todolist.databinding.FragmentAddNewBinding
 import com.example.todolist.model.ListParent
+import com.example.todolist.ui.dialog.DatePickerFragment
+import com.example.todolist.ui.dialog.TimePickerFragment
+import com.example.todolist.util.DateAndTimeListener
 import com.example.todolist.util.Enums
 import com.example.todolist.util.OnAddedListener
 import com.example.todolist.viewModel.HomeViewModel
@@ -31,7 +36,60 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
             etDescription.text
             etDeadline.text
 
+            cbDeadlineDate.setOnCheckedChangeListener(object:CompoundButton.OnCheckedChangeListener{
+                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                    if(isChecked){
+                        cbDeadlineText.isChecked = false
+                        handleDateTimeVisibility(!isChecked)
+                    }
+                }
+            })
+
+            cbDeadlineText.setOnCheckedChangeListener(object:CompoundButton.OnCheckedChangeListener{
+                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
+                    if(isChecked){
+                        cbDeadlineDate.isChecked = false
+                        handleDateTimeVisibility(isChecked)
+                    }
+                }
+            })
+
+            tvDate.setOnClickListener(object:View.OnClickListener{
+                override fun onClick(v: View?) {
+                    DatePickerFragment(object:DateAndTimeListener{
+                        override fun onDateSelected(date: String) {
+                            tvDate.text = date
+                        }
+
+                        override fun onTimeSelected(time: String) {
+                        }
+
+                    }).show(childFragmentManager, "DatePicker")
+                }
+            })
+
+            tvTime.setOnClickListener(object:View.OnClickListener{
+                override fun onClick(v: View?) {
+                    TimePickerFragment(object:DateAndTimeListener{
+                        override fun onDateSelected(date: String) {
+                        }
+
+                        override fun onTimeSelected(time: String) {
+                            tvTime.text = time
+                        }
+
+                    }).show(childFragmentManager, "timePicker")
+                }
+            })
+            cbDeadlineDate.isChecked = true;
         }
+
+    }
+
+    fun handleDateTimeVisibility(textSelected:Boolean){
+
+        mBinding.clDate.isVisible = !textSelected
+        mBinding.etDeadline.isVisible = textSelected
 
     }
 
@@ -70,7 +128,11 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
 
         var title: String = mBinding.etTitle.text.toString()
         var desc: String = mBinding.etDescription.text.toString()
-        var deadline: String = mBinding.etDeadline.text.toString()
+        var deadline: String = if(mBinding.cbDeadlineDate.isChecked){
+            mBinding.tvDate.text.toString() + " " + mBinding.tvTime.text.toString()
+        }else{
+            mBinding.etDeadline.text.toString()
+        }
 
         if(verifyInputs(title, desc, deadline)){
 
