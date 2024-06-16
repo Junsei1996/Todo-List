@@ -4,14 +4,18 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.example.todolist.R
-import com.example.todolist.adapters.HomeTabsAdapter
 import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentHomeParentBinding
-import com.example.todolist.databinding.FragmentParentBinding
+import com.example.todolist.util.BackPressedListener
 import com.example.todolist.viewModel.HomeViewModel
 
-class FragmentHomeParent : BaseFragment() {
+class FragmentHomeParent() : BaseFragment() {
 
+    constructor(backListener: BackPressedListener) : this() {
+        this.backListener = backListener
+    }
+
+    lateinit var backListener: BackPressedListener
     lateinit var mBinding: FragmentHomeParentBinding;
     private lateinit var navController: NavController;
 
@@ -21,9 +25,12 @@ class FragmentHomeParent : BaseFragment() {
 
     override fun init() {
 
-        val navHostFragment = childFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navHostFragment =
+            childFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
         navController = navHostFragment.navController
         navController.setGraph(R.navigation.main_nav)
+
+        backListener.setHomeNavController(navController)
 
     }
 
@@ -40,4 +47,5 @@ class FragmentHomeParent : BaseFragment() {
     override fun setListeners() {
 
     }
+
 }
