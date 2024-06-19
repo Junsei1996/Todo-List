@@ -4,6 +4,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.example.todolist.R
 import com.example.todolist.adapters.HomeTabsAdapter
@@ -65,15 +66,14 @@ class MainActivity : BaseActivity() {
 
     override fun onBackPressed() {
         val activeFragment = getActiveFragment()
-        if (activeFragment is NavHostFragment) {
-            val navController = activeFragment.navController
 
-            // Check if the back stack is empty or not
-            if (navController.currentBackStackEntry != null && !navController.popBackStack()) {
-                // If the back stack is not empty, pop the back stack
-                super.onBackPressed()
-            }
-        } else {
+        val navHost = activeFragment?.childFragmentManager?.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+        val navController = navHost.navController
+        if (navController.currentBackStackEntry != null) {
+            // If the back stack is not empty, pop the back stack
+            navController.popBackStack()
+        }
+        else {
             super.onBackPressed()
         }
     }
