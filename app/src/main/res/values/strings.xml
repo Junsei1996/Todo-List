@@ -18,4 +18,5 @@
     <string name="date">Date</string>
     <string name="input_date">Enter Date</string>
     <string name="enter_time">Enter Time</string>
+    <string name="home">Home</string>
 </resources>
