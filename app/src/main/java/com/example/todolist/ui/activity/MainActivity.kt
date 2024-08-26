@@ -32,7 +32,8 @@ class MainActivity : BaseActivity() {
             navController.setGraph(
                 when (it.itemId) {
                     R.id.iHome -> R.navigation.main_nav
-                    R.id.iHistory -> R.navigation.history_nav
+                    R.id.iCompleted -> R.navigation.completed_nav
+                    R.id.iArchived -> R.navigation.history_nav
                     else -> R.navigation.main_nav
                 }
             )
