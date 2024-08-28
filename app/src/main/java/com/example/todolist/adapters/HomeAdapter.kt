@@ -10,6 +10,7 @@ import com.example.todolist.R
 import com.example.todolist.base.BaseRecyclerViewAdapter
 import com.example.todolist.base.BaseViewHolder
 import com.example.todolist.databinding.ItemHomeBinding
+import com.example.todolist.databinding.ItemTodoMainBinding
 import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
 
@@ -21,7 +22,7 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
         this.completeListener = completedListener;
     }
 
-    inner class ViewHolder(var binding: ItemHomeBinding) :
+    inner class ViewHolder(var binding: ItemTodoMainBinding) :
         BaseViewHolder<ListParent>(binding.root) {
         override fun onBind(item: ListParent, position: Int) {
 
@@ -70,7 +71,7 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
 
     override fun viewHolder(view: View, viewType: Int): ViewHolder {
         return ViewHolder(
-            ItemHomeBinding.inflate(
+            ItemTodoMainBinding.inflate(
                 LayoutInflater.from(view.context),
                 view as ViewGroup,
                 false
