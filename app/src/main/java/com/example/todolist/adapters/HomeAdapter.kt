@@ -58,7 +58,6 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
                     }
                 }
 
-
             }
 
         }

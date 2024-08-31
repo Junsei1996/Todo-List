@@ -6,10 +6,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.example.todolist.R
+import com.example.todolist.adapters.CategoriesAdapter
 import com.example.todolist.adapters.HomeAdapter
 import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentHomeBinding
+import com.example.todolist.model.Category
 import com.example.todolist.model.ListParent
 import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
@@ -24,6 +27,7 @@ class FragmentHome : BaseFragment() {
 
     lateinit var mBinding: FragmentHomeBinding;
     lateinit var adapter: HomeAdapter
+    lateinit var catAdapter: CategoriesAdapter
     private val viewModel: HomeViewModel by viewModels {
         HomeViewModel.HomeViewModelFactory()
     }
@@ -31,6 +35,14 @@ class FragmentHome : BaseFragment() {
     override fun init() {
 
         mBinding.apply {
+
+            catAdapter = CategoriesAdapter()
+
+            rvCategory.adapter = catAdapter
+            rvCategory.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
+
+            catAdapter.listItems = getCategories()
+
             adapter = HomeAdapter(object: HomeCompleteListener{
                 override fun onComplete(item: ListParent) {
                     updateFile(item, Enums.STATUS.COMPLETED.name)
@@ -41,6 +53,7 @@ class FragmentHome : BaseFragment() {
                 }
 
             });
+
             rvHome.adapter = adapter
             rvHome.layoutManager = LinearLayoutManager(requireContext())
 
@@ -55,6 +68,10 @@ class FragmentHome : BaseFragment() {
 
         getFiles()
 
+    }
+
+    private fun getCategories(): java.util.ArrayList<Category> {
+        return arrayListOf(Category(0,"Cars"),Category(1,"Home Tasks"),Category(2,"Office Tasks"),Category(3,"Bug Fixes"),Category(4,"Resonance"))
     }
 
     private fun getFiles() {
