@@ -20,4 +20,5 @@
     <string name="enter_time">Enter Time</string>
     <string name="home">Home</string>
     <string name="completed">Completed</string>
+    <string name="add_category">+ Add Category</string>
 </resources>

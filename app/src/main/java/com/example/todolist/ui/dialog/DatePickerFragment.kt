@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.DatePicker
 import androidx.fragment.app.DialogFragment
 import com.example.todolist.util.DateAndTimeListener
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListener {
@@ -30,6 +31,10 @@ class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListene
 
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
         // Do something with the date the user picks.
-        dateListener.onDateSelected(day.toString()+":"+month.toString()+":"+year.toString())
+        val sdf = SimpleDateFormat("dd-MMM-yyyy")
+        var calendar : Calendar = Calendar.getInstance();
+        calendar.set(year, month, day)
+        val dateString: String = sdf.format(calendar.getTime())
+        dateListener.onDateSelected(dateString)
     }
 }

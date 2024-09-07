@@ -28,6 +28,6 @@ class TimePickerFragment() : DialogFragment(), TimePickerDialog.OnTimeSetListene
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        timeListener.onTimeSelected(hourOfDay.toString()+" "+minute.toString())
+        timeListener.onTimeSelected(hourOfDay.toString()+":"+minute.toString())
     }
 }

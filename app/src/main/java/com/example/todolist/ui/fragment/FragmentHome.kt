@@ -2,6 +2,7 @@ package com.example.todolist.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -14,6 +15,7 @@ import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentHomeBinding
 import com.example.todolist.model.Category
 import com.example.todolist.model.ListParent
+import com.example.todolist.util.CategoryListener
 import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
 import com.example.todolist.util.OnAddedListener
@@ -36,7 +38,16 @@ class FragmentHome : BaseFragment() {
 
         mBinding.apply {
 
-            catAdapter = CategoriesAdapter()
+            catAdapter = CategoriesAdapter(object :CategoryListener{
+                override fun onCategorySelected(id: Int) {
+                    Toast.makeText(requireContext(), "Category Selected, ID = "+id, Toast.LENGTH_LONG).show()
+                }
+
+                override fun onAddCategory() {
+                    Toast.makeText(requireContext(), "Category Adding", Toast.LENGTH_LONG).show()
+                }
+
+            })
 
             rvCategory.adapter = catAdapter
             rvCategory.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
@@ -71,7 +82,7 @@ class FragmentHome : BaseFragment() {
     }
 
     private fun getCategories(): java.util.ArrayList<Category> {
-        return arrayListOf(Category(0,"Cars"),Category(1,"Home Tasks"),Category(2,"Office Tasks"),Category(3,"Bug Fixes"),Category(4,"Resonance"))
+        return arrayListOf(Category(0,"Add"),Category(1,"Home Tasks"),Category(2,"Office Tasks"),Category(3,"Bug Fixes"),Category(4,"Resonance"))
     }
 
     private fun getFiles() {
