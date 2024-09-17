@@ -18,6 +18,9 @@
         <action
             android:id="@+id/action_fragmentHome_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentAddCategory"
+            app:destination="@id/fragmentAddCategory" />
     </fragment>
     <dialog
         android:id="@+id/fragmentAddNew"
@@ -49,5 +52,11 @@
             android:id="@+id/action_historyFragment_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentAddCategory"
+        android:name="com.example.todolist.ui.fragment.FragmentAddCategory"
+        android:label="FragmentAddCategory"
+        tools:layout="@layout/fragment_add_category"
+        />
 
 </navigation>

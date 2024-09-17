@@ -7,6 +7,7 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.todolist.database.DataRepository
+import com.example.todolist.model.Category
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
 import com.example.todolist.util.Enums
@@ -25,12 +26,22 @@ class HomeViewModel() : ViewModel() {
         }
     }
 
+    fun getCategories() = liveData {
+        DataRepository.getCategories().collect { data ->
+            emit(data)
+        }
+    }
+
     fun getHistory() = liveData {
         DataRepository.getHistory().collect { data ->
             emit(data)
         }
     }
 
+    fun addCategory(item: Category) = liveData {
+        val result = DataRepository.addNewCategory(item)
+        emit(Enums.RESPONSE.SUCCESS)
+    }
     fun addItem(item: ListParent) = liveData {
         val result = DataRepository.addNewItem(item)
         emit(Enums.RESPONSE.SUCCESS)

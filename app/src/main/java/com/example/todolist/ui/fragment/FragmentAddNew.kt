@@ -139,6 +139,7 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
             var item = ListParent(
                 name = title,
                 description = desc,
+                categoryId = 0,
                 deadline = deadline,
                 status = Enums.STATUS.ACTIVE.name
             )

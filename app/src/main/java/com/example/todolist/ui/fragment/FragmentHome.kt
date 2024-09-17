@@ -44,7 +44,7 @@ class FragmentHome : BaseFragment() {
                 }
 
                 override fun onAddCategory() {
-                    Toast.makeText(requireContext(), "Category Adding", Toast.LENGTH_LONG).show()
+                    findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddCategory)
                 }
 
             })
@@ -52,7 +52,8 @@ class FragmentHome : BaseFragment() {
             rvCategory.adapter = catAdapter
             rvCategory.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
-            catAdapter.listItems = getCategories()
+//            catAdapter.listItems = getCategories()
+            getCategoriesfromDB()
 
             adapter = HomeAdapter(object: HomeCompleteListener{
                 override fun onComplete(item: ListParent) {
@@ -82,7 +83,7 @@ class FragmentHome : BaseFragment() {
     }
 
     private fun getCategories(): java.util.ArrayList<Category> {
-        return arrayListOf(Category(0,"Add"),Category(1,"Home Tasks"),Category(2,"Office Tasks"),Category(3,"Bug Fixes"),Category(4,"Resonance"))
+        return arrayListOf(Category(0,"Add","Dummy","Dummy"))
     }
 
     private fun getFiles() {
@@ -94,6 +95,22 @@ class FragmentHome : BaseFragment() {
                 showEmptyState(true)
             }
         }
+    }
+
+    private fun getCategoriesfromDB() {
+        viewModel.getCategories().observe(this@FragmentHome){
+            if(!it.isNullOrEmpty()){
+                setCategories(it as ArrayList<Category>)
+            }else{
+            }
+        }
+    }
+
+    private fun setCategories(categories: java.util.ArrayList<Category>) {
+        var add = Category(0,"Add","Dummy","Dummy")
+        var cats = arrayListOf(add)
+        cats.addAll(categories)
+        catAdapter.listItems = cats
     }
 
     private fun updateFile(item: ListParent, status: String) {

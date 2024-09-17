@@ -4,23 +4,24 @@ import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.todolist.util.Enums
 
 
 @Entity(tableName = "files_table")
 data class ListParent(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    var name: String,
-    var description: String,
-    var status: String,
-    var deadline:String
+    var name: String?,
+    var description: String?,
+    var categoryId:Int,
+    var status: String?,
+    var deadline:String?
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString()
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
@@ -28,6 +29,7 @@ data class ListParent(
         parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(description)
+        parcel.writeInt(categoryId)
         parcel.writeString(status)
         parcel.writeString(deadline)
     }

@@ -21,4 +21,6 @@
     <string name="home">Home</string>
     <string name="completed">Completed</string>
     <string name="add_category">+ Add Category</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="priority">Priority</string>
 </resources>
