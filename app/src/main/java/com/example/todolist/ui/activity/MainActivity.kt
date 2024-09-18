@@ -24,6 +24,7 @@ class MainActivity : BaseActivity() {
         navController = navHostFragment.navController
         navController.setGraph(R.navigation.main_nav)
 
+
     }
 
     override fun setClickListeners() {

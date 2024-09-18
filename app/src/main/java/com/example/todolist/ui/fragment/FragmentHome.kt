@@ -40,7 +40,8 @@ class FragmentHome : BaseFragment() {
 
             catAdapter = CategoriesAdapter(object :CategoryListener{
                 override fun onCategorySelected(id: Int) {
-                    Toast.makeText(requireContext(), "Category Selected, ID = "+id, Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
+                    getFilesbyCategory(id)
                 }
 
                 override fun onAddCategory() {
@@ -97,11 +98,26 @@ class FragmentHome : BaseFragment() {
         }
     }
 
+    private fun getFilesbyCategory(catId:Int) {
+        viewModel.getItemsByCategory(catId).observe(this@FragmentHome){
+            if(!it.isNullOrEmpty()){
+                showEmptyState(false)
+                setListItems(it as ArrayList<ListParent>)
+            }else{
+                showEmptyState(true)
+            }
+        }
+    }
+
+    var categoriesList : ArrayList<Category> = arrayListOf();
     private fun getCategoriesfromDB() {
         viewModel.getCategories().observe(this@FragmentHome){
             if(!it.isNullOrEmpty()){
+                categoriesList.clear()
+                categoriesList.addAll(it)
                 setCategories(it as ArrayList<Category>)
             }else{
+                setCategories(arrayListOf())
             }
         }
     }
@@ -136,7 +152,7 @@ class FragmentHome : BaseFragment() {
             btnAdd.setOnClickListener {
 //                findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddNew)
 
-                var addNew = FragmentAddNew(object:OnAddedListener{
+                var addNew = FragmentAddNew(categoriesList,object:OnAddedListener{
                     override fun parentOrTaskAdded() {
                         getFiles()
                     }

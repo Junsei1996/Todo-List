@@ -3,6 +3,7 @@ package com.example.todolist.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.ViewDataBinding
 import com.example.todolist.R
 import com.example.todolist.base.BaseRecyclerViewAdapter
@@ -32,6 +33,7 @@ class CategoriesAdapter() : BaseRecyclerViewAdapter<CategoriesAdapter.ViewHolder
 
                 tvCategory.text = item.title
                 clCategory.setOnClickListener{
+                    Toast.makeText(itemBinding.root.context, item.id.toString(), Toast.LENGTH_SHORT).show()
                     catListener.onCategorySelected(item.id)
                 }
             }

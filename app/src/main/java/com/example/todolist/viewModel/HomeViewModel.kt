@@ -26,6 +26,12 @@ class HomeViewModel() : ViewModel() {
         }
     }
 
+    fun getItemsByCategory(catId:Int) = liveData {
+        DataRepository.getItems(catId).collect { data ->
+            emit(data)
+        }
+    }
+
     fun getCategories() = liveData {
         DataRepository.getCategories().collect { data ->
             emit(data)

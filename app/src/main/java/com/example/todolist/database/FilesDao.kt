@@ -18,7 +18,7 @@ interface FilesDao {
     fun insertFile(file: ListParent);
     @Query("Select * from categories_table")
     fun getCategories(): Flow<MutableList<Category>>
-    @Query("Select * from files_table WHERE categoryId = :catId & status = :stat ORDER BY id")
+    @Query("Select * from files_table WHERE categoryId = :catId AND status = :stat ORDER BY id")
     fun getFilesByCategories(catId:Int, stat: String): Flow<MutableList<ListParent>>
     @Query("Select * from files_table WHERE status = :stat ORDER BY id")
     fun getFiles(stat: String): Flow<MutableList<ListParent>>
