@@ -25,11 +25,11 @@ object DataRepository {
     fun getCategories(): Flow<MutableList<Category>> {
         return TodoApplication.database.filesDao().getCategories()
     }
-    fun getItems(): Flow<MutableList<ListParent>> {
-        return TodoApplication.database.filesDao().getFiles(Enums.STATUS.ACTIVE.name)
+    fun getItems(status:String): Flow<MutableList<ListParent>> {
+        return TodoApplication.database.filesDao().getFiles(status)
     }
-    fun getItems(catId:Int): Flow<MutableList<ListParent>> {
-        return TodoApplication.database.filesDao().getFilesByCategories(catId,Enums.STATUS.ACTIVE.name)
+    fun getItems(catId:Int,status:String): Flow<MutableList<ListParent>> {
+        return TodoApplication.database.filesDao().getFilesByCategories(catId,status)
     }
     fun getHistory(): Flow<MutableList<ListParent>> {
         return TodoApplication.database.filesDao().getHistory(Enums.STATUS.COMPLETED.name)

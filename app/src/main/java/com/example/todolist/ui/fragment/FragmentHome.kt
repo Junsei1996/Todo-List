@@ -41,7 +41,11 @@ class FragmentHome : BaseFragment() {
             catAdapter = CategoriesAdapter(object :CategoryListener{
                 override fun onCategorySelected(id: Int) {
                     Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
-                    getFilesbyCategory(id)
+                    if(id == -2){
+                        getFiles()
+                    }else{
+                        getFilesbyCategory(id)
+                    }
                 }
 
                 override fun onAddCategory() {
@@ -54,7 +58,8 @@ class FragmentHome : BaseFragment() {
             rvCategory.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
 //            catAdapter.listItems = getCategories()
-            getCategoriesfromDB()
+//            getCategoriesfromDB()
+            manageCategories()
 
             adapter = HomeAdapter(object: HomeCompleteListener{
                 override fun onComplete(item: ListParent) {
@@ -83,12 +88,12 @@ class FragmentHome : BaseFragment() {
 
     }
 
-    private fun getCategories(): java.util.ArrayList<Category> {
-        return arrayListOf(Category(0,"Add","Dummy","Dummy"))
-    }
+//    private fun getCategories(): java.util.ArrayList<Category> {
+//        return arrayListOf(Category(0,"Add","Dummy","Dummy"))
+//    }
 
     private fun getFiles() {
-        viewModel.getItems().observe(this@FragmentHome){
+        viewModel.getItems(Enums.STATUS.ACTIVE.name).observe(this@FragmentHome){
             if(!it.isNullOrEmpty()){
                 showEmptyState(false)
                 setListItems(it as ArrayList<ListParent>)
@@ -99,7 +104,7 @@ class FragmentHome : BaseFragment() {
     }
 
     private fun getFilesbyCategory(catId:Int) {
-        viewModel.getItemsByCategory(catId).observe(this@FragmentHome){
+        viewModel.getItemsByCategory(catId, Enums.STATUS.ACTIVE.name).observe(this@FragmentHome){
             if(!it.isNullOrEmpty()){
                 showEmptyState(false)
                 setListItems(it as ArrayList<ListParent>)
@@ -109,25 +114,25 @@ class FragmentHome : BaseFragment() {
         }
     }
 
-    var categoriesList : ArrayList<Category> = arrayListOf();
-    private fun getCategoriesfromDB() {
-        viewModel.getCategories().observe(this@FragmentHome){
-            if(!it.isNullOrEmpty()){
-                categoriesList.clear()
-                categoriesList.addAll(it)
-                setCategories(it as ArrayList<Category>)
-            }else{
-                setCategories(arrayListOf())
-            }
-        }
-    }
+//    var categoriesList : ArrayList<Category> = arrayListOf();
+//    private fun getCategoriesfromDB() {
+//        viewModel.getCategories().observe(this@FragmentHome){
+//            if(!it.isNullOrEmpty()){
+//                categoriesList.clear()
+//                categoriesList.addAll(it)
+//                setCategories(it as ArrayList<Category>)
+//            }else{
+//                setCategories(arrayListOf())
+//            }
+//        }
+//    }
 
-    private fun setCategories(categories: java.util.ArrayList<Category>) {
-        var add = Category(0,"Add","Dummy","Dummy")
-        var cats = arrayListOf(add)
-        cats.addAll(categories)
-        catAdapter.listItems = cats
-    }
+//    private fun setCategories(categories: java.util.ArrayList<Category>) {
+//        var add = Category(0,"Add","Dummy","Dummy")
+//        var cats = arrayListOf(add)
+//        cats.addAll(categories)
+//        catAdapter.listItems = cats
+//    }
 
     private fun updateFile(item: ListParent, status: String) {
 
@@ -152,7 +157,7 @@ class FragmentHome : BaseFragment() {
             btnAdd.setOnClickListener {
 //                findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddNew)
 
-                var addNew = FragmentAddNew(categoriesList,object:OnAddedListener{
+                var addNew = FragmentAddNew(listCategories,object:OnAddedListener{
                     override fun parentOrTaskAdded() {
                         getFiles()
                     }
@@ -182,5 +187,27 @@ class FragmentHome : BaseFragment() {
         }
 
     }
+
+    private var addCatItem = Category(id = -1, title = "Add", deadline = "", priority = "")
+    private var allCatItem = Category(id = -2, title = "ALL", deadline = "", priority = "")
+    private var listCategories = ArrayList<Category>()
+
+    private fun manageCategories(){
+
+        viewModel.getCategories().observe(this@FragmentHome){
+            var tempArray = arrayListOf<Category>()
+            tempArray.add(addCatItem)
+            tempArray.add(allCatItem)
+
+            if(!it.isNullOrEmpty()){
+                listCategories.clear()
+                listCategories.addAll(it as ArrayList<Category>)
+                tempArray.addAll(listCategories)
+            }
+            catAdapter.listItems = tempArray
+        }
+
+    }
+
 
 }

@@ -10,7 +10,8 @@ object Enums {
 
     enum class STATUS (key:String){
         ACTIVE("A"),
-        COMPLETED("C")
+        COMPLETED("C"),
+        ARCHIVED("R")
     }
 
 

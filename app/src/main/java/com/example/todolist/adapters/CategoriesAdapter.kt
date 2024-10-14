@@ -76,7 +76,7 @@ class CategoriesAdapter() : BaseRecyclerViewAdapter<CategoriesAdapter.ViewHolder
     override fun getItemViewType(position: Int): Int {
         return when (listItems[position].id) {
 
-            0 -> {
+            -1 -> {
                 2
             }
 

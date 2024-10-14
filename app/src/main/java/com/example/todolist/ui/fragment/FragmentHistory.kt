@@ -66,7 +66,7 @@ class FragmentHistory : BaseFragment() {
     }
 
     private fun getFiles() {
-        viewModel.getHistory().observe(this@FragmentHistory){
+        viewModel.getItems(Enums.STATUS.ARCHIVED.name).observe(this@FragmentHistory){
             if(!it.isNullOrEmpty()){
                 showEmptyState(false)
                 setListItems(it as ArrayList<ListParent>)

@@ -42,7 +42,7 @@ class FragmentCompleted  : BaseFragment() {
                 var bundle = Bundle();
                 bundle.putInt(Enums.BUNDLE_KEYS.FILE_ID.name,it.id)
                 bundle.putParcelable(Enums.BUNDLE_KEYS.PARENT_FILE.name, it)
-                findNavController().navigate(R.id.action_historyFragment_to_fragmentDetails, bundle)
+                findNavController().navigate(R.id.action_completedFragment_to_fragmentDetails, bundle)
             }
 
         }
@@ -51,7 +51,7 @@ class FragmentCompleted  : BaseFragment() {
 
     }
 
-    override fun getFragmentLayout(): Int = R.layout.fragment_history
+    override fun getFragmentLayout(): Int = R.layout.fragment_completed
 
     override fun getViewModel() {
 
@@ -66,7 +66,7 @@ class FragmentCompleted  : BaseFragment() {
     }
 
     private fun getFiles() {
-        viewModel.getHistory().observe(this@FragmentCompleted){
+        viewModel.getItems(Enums.STATUS.COMPLETED.name).observe(this@FragmentCompleted){
             if(!it.isNullOrEmpty()){
                 showEmptyState(false)
                 setListItems(it as ArrayList<ListParent>)

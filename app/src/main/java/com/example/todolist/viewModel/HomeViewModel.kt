@@ -20,14 +20,14 @@ import kotlinx.coroutines.launch
 
 class HomeViewModel() : ViewModel() {
 
-    fun getItems() = liveData {
-        DataRepository.getItems().collect { data ->
+    fun getItems(status: String) = liveData {
+        DataRepository.getItems(status).collect { data ->
             emit(data)
         }
     }
 
-    fun getItemsByCategory(catId:Int) = liveData {
-        DataRepository.getItems(catId).collect { data ->
+    fun getItemsByCategory(catId:Int, status: String) = liveData {
+        DataRepository.getItems(catId, status).collect { data ->
             emit(data)
         }
     }
