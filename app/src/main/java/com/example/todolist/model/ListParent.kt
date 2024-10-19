@@ -21,6 +21,7 @@ data class ListParent(
     var name: String?,
     var description: String?,
     var categoryId:Int,
+    var categoryName: String?,
     var status: String?,
     var deadline:String?
 ):Parcelable {
@@ -29,6 +30,7 @@ data class ListParent(
         parcel.readString(),
         parcel.readString(),
         parcel.readInt(),
+        parcel.readString(),
         parcel.readString(),
         parcel.readString()
     ) {
@@ -39,6 +41,7 @@ data class ListParent(
         parcel.writeString(name)
         parcel.writeString(description)
         parcel.writeInt(categoryId)
+        parcel.writeString(categoryName)
         parcel.writeString(status)
         parcel.writeString(deadline)
     }

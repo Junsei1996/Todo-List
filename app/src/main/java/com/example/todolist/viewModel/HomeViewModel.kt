@@ -58,6 +58,11 @@ class HomeViewModel() : ViewModel() {
         emit(result)
     }
 
+    fun deleteCategory(id: Int) = liveData {
+        val result = DataRepository.deleteCategory(id)
+        emit(result)
+    }
+
     fun addTask(task: DetailItem) = liveData {
         val result = DataRepository.addNewTask(task)
         emit(result)

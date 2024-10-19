@@ -2,6 +2,7 @@ package com.example.todolist.ui.fragment
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,10 +13,12 @@ import com.example.todolist.base.BaseFragment
 import com.example.todolist.databinding.FragmentHomeBinding
 import com.example.todolist.model.Category
 import com.example.todolist.model.ListParent
+import com.example.todolist.util.AlertDialogListener
 import com.example.todolist.util.CategoryListener
 import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
 import com.example.todolist.util.OnAddedListener
+import com.example.todolist.util.UtilityFunctions
 import com.example.todolist.viewModel.HomeViewModel
 
 class FragmentHome : BaseFragment() {
@@ -45,7 +48,7 @@ class FragmentHome : BaseFragment() {
                 }
 
                 override fun onRemoveCategory(id: Int) {
-
+                    deleteCategoryAlert(id)
                 }
 
             })
@@ -78,6 +81,26 @@ class FragmentHome : BaseFragment() {
 //    private fun getCategories(): java.util.ArrayList<Category> {
 //        return arrayListOf(Category(0,"Add","Dummy","Dummy"))
 //    }
+
+    private fun deleteCategoryAlert(categoryId:Int){
+        UtilityFunctions.showAlertDialog(
+            requireContext(),
+            "Are you sure you want to delete the Category?",
+            "All related tasks and sub tasks will also be deleted.",
+            object : AlertDialogListener {
+                override fun onAccept() {
+                    deleteCategory(categoryId)
+                }
+
+                override fun onReject() {
+                }
+            })
+    }
+    private fun deleteCategory(categoryId:Int){
+        viewModel.deleteCategory(categoryId).observe(this@FragmentHome){
+            Toast.makeText(requireContext(), "Deleted", Toast.LENGTH_SHORT).show()
+        }
+    }
 
     private fun getFiles() {
         viewModel.getItems(Enums.STATUS.ACTIVE.name).observe(this@FragmentHome){

@@ -28,6 +28,8 @@ interface FilesDao {
     fun updateFile(fileId: Int, status: String)
     @Query("Delete from files_table where id = :itemId")
     fun deleteFile(itemId: Int)
+    @Query("Delete from categories_table where id = :catId")
+    fun deleteCategory(catId: Int)
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertTask(task: DetailItem)
     @Query("Select * from detail_item where parentId = :fileId ORDER BY id")

@@ -21,7 +21,7 @@ class HomeAdapter() : BaseRecyclerViewAdapter<HomeAdapter.ViewHolder, ListParent
 
                 txtTitle.text = item.name
                 txtDescription.text = item.description ?: "N/A"
-                txtCategory.text = item.categoryId.toString()
+                txtCategory.text = item.categoryName.toString()
                 txtDeadline.text = item.deadline ?: "N/A"
 
                 var timePassed = isTimePassed(item.deadline)

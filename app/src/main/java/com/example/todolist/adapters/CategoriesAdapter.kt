@@ -56,7 +56,9 @@ class CategoriesAdapter() : BaseRecyclerViewAdapter<CategoriesAdapter.ViewHolder
                     notifyItemChanged(selectedPos)
                 }
                 clCategory.setOnLongClickListener {
-                    catListener.onRemoveCategory(item.id)
+                    if(item.id != -2){
+                        catListener.onRemoveCategory(item.id)
+                    }
                     true
                 }
             }

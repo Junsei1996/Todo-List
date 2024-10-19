@@ -126,12 +126,11 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
 
         if(verifyInputs(title,category as Category?, desc, deadline)){
 
-            Toast.makeText(requireContext(), category?.id.toString(), Toast.LENGTH_SHORT).show()
-
             var item = ListParent(
                 name = title,
                 description = desc,
                 categoryId = category.id,
+                categoryName = category.title,
                 deadline = deadline,
                 status = Enums.STATUS.ACTIVE.name
             )
