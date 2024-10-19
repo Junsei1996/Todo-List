@@ -43,31 +43,9 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
 
         mBinding.apply {
 
-            etTitle.text
-            etDescription.text
-            etDeadline.text
-
             categoriesAdapter = CategoryListAdapter(requireContext(),0,  categories);
 
             catSpinner.adapter = categoriesAdapter
-
-            cbDeadlineDate.setOnCheckedChangeListener(object:CompoundButton.OnCheckedChangeListener{
-                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                    if(isChecked){
-                        cbDeadlineText.isChecked = false
-                        handleDateTimeVisibility(!isChecked)
-                    }
-                }
-            })
-
-            cbDeadlineText.setOnCheckedChangeListener(object:CompoundButton.OnCheckedChangeListener{
-                override fun onCheckedChanged(buttonView: CompoundButton?, isChecked: Boolean) {
-                    if(isChecked){
-                        cbDeadlineDate.isChecked = false
-                        handleDateTimeVisibility(isChecked)
-                    }
-                }
-            })
 
             tvDate.setOnClickListener(object:View.OnClickListener{
                 override fun onClick(v: View?) {
@@ -96,17 +74,10 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
                     }).show(childFragmentManager, "timePicker")
                 }
             })
-            cbDeadlineDate.isChecked = true;
         }
 
     }
 
-    fun handleDateTimeVisibility(textSelected:Boolean){
-
-        mBinding.clDate.isVisible = !textSelected
-        mBinding.etDeadline.isVisible = textSelected
-
-    }
 
     override fun getFragmentLayout(): Int = R.layout.fragment_add_new
 
@@ -146,10 +117,11 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
         var title: String = mBinding.etTitle.text.toString()
         var desc: String = mBinding.etDescription.text.toString()
         var category = mBinding.catSpinner.selectedItem
-        var deadline: String = if(mBinding.cbDeadlineDate.isChecked){
+//        dd-MMM-yyyy HH:mm
+        var deadline: String = if(mBinding.tvDate.text.isNullOrEmpty() || mBinding.tvTime.text.isNullOrEmpty() ){
+            ""
+        }else {
             mBinding.tvDate.text.toString() + " " + mBinding.tvTime.text.toString()
-        }else{
-            mBinding.etDeadline.text.toString()
         }
 
         if(verifyInputs(title,category as Category?, desc, deadline)){

@@ -52,7 +52,7 @@
             android:id="@+id/action_historyFragment_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/fragmentAddCategory"
         android:name="com.example.todolist.ui.fragment.FragmentAddCategory"
         android:label="FragmentAddCategory"

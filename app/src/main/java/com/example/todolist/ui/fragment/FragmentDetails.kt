@@ -47,10 +47,16 @@ class FragmentDetails : BaseFragment() {
             tvDescription.text = parent.description
             tvDeadline.text = parent.deadline
 
-            if (parent.status == Enums.STATUS.ARCHIVED.name) {
+            if (parent.status == Enums.STATUS.ACTIVE.name){
+                btnArchive.isVisible = true
+                btnComplete.isVisible = true
+                btnActive.isVisible = false
+            } else if (parent.status == Enums.STATUS.ARCHIVED.name) {
                 btnArchive.isVisible = false
                 btnComplete.isVisible = true
+                btnActive.isVisible = false
             } else {
+                btnActive.isVisible = true
                 btnArchive.isVisible = true
                 btnComplete.isVisible = false
             }
@@ -118,6 +124,11 @@ class FragmentDetails : BaseFragment() {
             }
             btnArchive.setOnClickListener{
                 viewModel.updateFile(parentId,Enums.STATUS.ARCHIVED.name).observe(this@FragmentDetails) {
+                    findNavController().navigateUp()
+                }
+            }
+            btnActive.setOnClickListener{
+                viewModel.updateFile(parentId,Enums.STATUS.ACTIVE.name).observe(this@FragmentDetails) {
                     findNavController().navigateUp()
                 }
             }

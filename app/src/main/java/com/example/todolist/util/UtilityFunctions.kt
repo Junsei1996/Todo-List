@@ -4,7 +4,9 @@ import android.app.AlertDialog
 import android.content.Context
 import android.util.Log
 import com.example.todolist.R
-
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 object UtilityFunctions {
 
@@ -26,6 +28,26 @@ object UtilityFunctions {
             .setNegativeButton(R.string.cancel, null)
             .show()
 
+    }
+
+    fun isTimePassed(inputTime: String?): Boolean {
+        // Define the date format
+        val dateFormat = SimpleDateFormat("dd-MMM-yyyy HH:mm", Locale.getDefault())
+
+        return try {
+            // Parse the input time string to a Date object
+            val parsedDate: Date = inputTime?.let { dateFormat.parse(it) } ?: return false
+
+            // Get the current time
+            val currentTime: Date = Date()
+
+            // Compare the input time with the current time
+            parsedDate.before(currentTime)
+        } catch (e: Exception) {
+            // Handle the exception (e.g., parsing error)
+            e.printStackTrace()
+            false // Return false if there's an error
+        }
     }
 
 }

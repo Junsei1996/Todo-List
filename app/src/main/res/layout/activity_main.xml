@@ -15,12 +15,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:defaultNavHost="true"
-            app:navGraph="@navigation/main_nav"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@id/tabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            />
+            app:layout_constraintVertical_bias="0.0"
+            app:navGraph="@navigation/main_nav" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/tabLayout"
@@ -28,15 +29,15 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:shadowColor="@color/black"
-            app:itemIconTint="@color/space_cadet"
-            app:itemTextColor="@color/space_cadet"
+            app:itemIconTint="@color/dark_blue"
+            app:itemTextColor="@color/black"
             app:labelVisibilityMode="labeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/home_bottom_menu"
-            app:tabIndicatorColor="@color/space_cadet"
+            app:tabIndicatorColor="@color/pink"
             app:tabMode="fixed"
             app:tabTextColor="@color/black" />
 

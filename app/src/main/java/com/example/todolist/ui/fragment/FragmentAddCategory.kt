@@ -50,8 +50,6 @@ class FragmentAddCategory : BaseBottomSheetFragment() {
         mBinding.apply {
             return Category(0,
             etTitle.text.toString(),
-                etDeadline.text.toString(),
-                etPriority.text.toString()
             )
         }
     }

@@ -24,4 +24,7 @@
     <string name="add_new_category">Add New Category</string>
     <string name="priority">Priority</string>
     <string name="add_to_archive">Add to Archive</string>
+    <string name="active_tasks">Active Tasks</string>
+    <string name="completed_tasks">Completed Tasks</string>
+    <string name="mark_as_active">Mark as Active</string>
 </resources>

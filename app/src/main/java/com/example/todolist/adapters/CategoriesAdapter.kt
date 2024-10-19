@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.databinding.ViewDataBinding
 import com.example.todolist.R
 import com.example.todolist.base.BaseRecyclerViewAdapter
@@ -17,12 +18,18 @@ import com.example.todolist.util.CategoryListener
 class CategoriesAdapter() : BaseRecyclerViewAdapter<CategoriesAdapter.ViewHolder, Category>() {
 
     lateinit var catListener:CategoryListener;
+    var selectedPos = 0
     constructor(listener: CategoryListener) : this() {
         this.catListener = listener
     }
 
     abstract inner class ViewHolder(var binding: ViewDataBinding) :
         BaseViewHolder<Category>(binding.root) {
+    }
+
+    fun setSelectedPosition(pos:Int){
+        selectedPos = pos
+        notifyItemChanged(selectedPos)
     }
 
     inner class CategoryViewHolder(var itemBinding: ItemCategoryBinding) :
@@ -32,9 +39,25 @@ class CategoriesAdapter() : BaseRecyclerViewAdapter<CategoriesAdapter.ViewHolder
             itemBinding.apply {
 
                 tvCategory.text = item.title
+
+                if(selectedPos == position){
+                    cvCategory.setCardBackgroundColor(ContextCompat.getColor(itemBinding.root.context, R.color.green))
+                }else{
+                    cvCategory.setCardBackgroundColor(ContextCompat.getColor(itemBinding.root.context, R.color.white))
+                }
+
                 clCategory.setOnClickListener{
-                    Toast.makeText(itemBinding.root.context, item.id.toString(), Toast.LENGTH_SHORT).show()
                     catListener.onCategorySelected(item.id)
+
+                    val previousSelectedPosition = selectedPos
+                    selectedPos = position
+                    // Notify the adapter to refresh the old and new selected positions
+                    notifyItemChanged(previousSelectedPosition)
+                    notifyItemChanged(selectedPos)
+                }
+                clCategory.setOnLongClickListener {
+                    catListener.onRemoveCategory(item.id)
+                    true
                 }
             }
 

@@ -8,14 +8,19 @@
         android:layout_height="match_parent"
         >
 
-        <com.google.android.material.appbar.MaterialToolbar
+        <TextView
             android:id="@+id/toolbar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:text="@string/active_tasks"
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/dark_blue"
+            android:textAlignment="center"
+            android:paddingTop="12dp"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:title="@string/all_files"
             />
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,7 +65,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:clipToPadding="false"
-            android:paddingTop="12dp"
+            android:layout_marginTop="12dp"
             android:layout_marginHorizontal="8dp"
             android:orientation="horizontal"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -94,7 +99,7 @@
             android:layout_marginHorizontal="12dp"
             android:src="@drawable/svg_plus"
             app:tint="@color/white"
-            android:backgroundTint="@color/payne_gray"
+            android:backgroundTint="@color/pink"
             android:contentDescription="@string/all_files" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

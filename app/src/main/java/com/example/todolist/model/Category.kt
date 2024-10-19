@@ -8,14 +8,10 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "categories_table")
 data class Category(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    var title: String?,
-    var deadline:String?,
-    var priority:String?
-): Parcelable {
+    var title: String?
+):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString(),
-        parcel.readString(),
         parcel.readString()
     ) {
     }
@@ -23,8 +19,6 @@ data class Category(
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(id)
         parcel.writeString(title)
-        parcel.writeString(deadline)
-        parcel.writeString(priority)
     }
 
     override fun describeContents(): Int {

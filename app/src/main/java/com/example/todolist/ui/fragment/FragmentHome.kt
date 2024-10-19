@@ -2,12 +2,9 @@ package com.example.todolist.ui.fragment
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView.Orientation
 import com.example.todolist.R
 import com.example.todolist.adapters.CategoriesAdapter
 import com.example.todolist.adapters.HomeAdapter
@@ -20,10 +17,6 @@ import com.example.todolist.util.Enums
 import com.example.todolist.util.HomeCompleteListener
 import com.example.todolist.util.OnAddedListener
 import com.example.todolist.viewModel.HomeViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlin.collections.ArrayList
 
 class FragmentHome : BaseFragment() {
 
@@ -40,7 +33,6 @@ class FragmentHome : BaseFragment() {
 
             catAdapter = CategoriesAdapter(object :CategoryListener{
                 override fun onCategorySelected(id: Int) {
-                    Toast.makeText(requireContext(), id.toString(), Toast.LENGTH_SHORT).show()
                     if(id == -2){
                         getFiles()
                     }else{
@@ -52,8 +44,12 @@ class FragmentHome : BaseFragment() {
                     findNavController().navigate(R.id.action_fragmentHome_to_fragmentAddCategory)
                 }
 
-            })
+                override fun onRemoveCategory(id: Int) {
 
+                }
+
+            })
+            catAdapter.setSelectedPosition(1)
             rvCategory.adapter = catAdapter
             rvCategory.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL,false)
 
@@ -61,16 +57,7 @@ class FragmentHome : BaseFragment() {
 //            getCategoriesfromDB()
             manageCategories()
 
-            adapter = HomeAdapter(object: HomeCompleteListener{
-                override fun onComplete(item: ListParent) {
-                    updateFile(item, Enums.STATUS.COMPLETED.name)
-                }
-
-                override fun onUncheck(item: ListParent) {
-                    updateFile(item, Enums.STATUS.ACTIVE.name)
-                }
-
-            });
+            adapter = HomeAdapter()
 
             rvHome.adapter = adapter
             rvHome.layoutManager = LinearLayoutManager(requireContext())
@@ -188,8 +175,8 @@ class FragmentHome : BaseFragment() {
 
     }
 
-    private var addCatItem = Category(id = -1, title = "Add", deadline = "", priority = "")
-    private var allCatItem = Category(id = -2, title = "ALL", deadline = "", priority = "")
+    private var addCatItem = Category(id = -1, title = "Add")
+    private var allCatItem = Category(id = -2, title = "ALL")
     private var listCategories = ArrayList<Category>()
 
     private fun manageCategories(){
