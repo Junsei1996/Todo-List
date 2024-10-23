@@ -34,3 +34,12 @@ buildscript {
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+def secretPropsFile = rootProject.file("secrets.properties")
+if (secretPropsFile.exists()) {
+    def secretProps = new Properties()
+    secretProps.load(new FileInputStream(secretPropsFile))
+    secretProps.each { prop ->
+        ext[prop.key] = prop.value
+    }
+}

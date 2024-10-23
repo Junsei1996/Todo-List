@@ -58,7 +58,7 @@ class FragmentAddTask() : BaseBottomSheetFragment() {
                 saveTask()
             }
             btnCancel.setOnClickListener {
-                findNavController().navigateUp()
+                dismiss()
             }
 
 

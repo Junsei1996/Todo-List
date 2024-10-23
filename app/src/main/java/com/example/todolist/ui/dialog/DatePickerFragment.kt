@@ -11,7 +11,7 @@ import java.util.Calendar
 
 class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListener {
 
-    lateinit var dateListener: DateAndTimeListener
+    private lateinit var dateListener: DateAndTimeListener
 
     constructor(listener: DateAndTimeListener):this(){
         this.dateListener = listener
@@ -32,7 +32,7 @@ class DatePickerFragment() : DialogFragment(), DatePickerDialog.OnDateSetListene
     override fun onDateSet(view: DatePicker, year: Int, month: Int, day: Int) {
         // Do something with the date the user picks.
         val sdf = SimpleDateFormat("dd-MMM-yyyy")
-        var calendar : Calendar = Calendar.getInstance();
+        val calendar : Calendar = Calendar.getInstance();
         calendar.set(year, month, day)
         val dateString: String = sdf.format(calendar.getTime())
         dateListener.onDateSelected(dateString)

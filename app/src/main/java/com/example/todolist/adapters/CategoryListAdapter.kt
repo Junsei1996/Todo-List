@@ -31,29 +31,33 @@ class CategoryListAdapter(context: Context, resource: Int, categories: ArrayList
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup): View {
 
         val view: View
-        if (position == 0) {
-            view = layoutInflater.inflate(R.layout.item_category_dropdown, parent, false)
-            view.setOnClickListener {
-                val root = parent.rootView
-                root.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK))
-                root.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK))
-            }
-        } else {
-            view = layoutInflater.inflate(R.layout.item_category_dropdown, parent, false)
-            getItem(position)?.let { setItemForCountry(view, it) }
-        }
+//        if (position == 0) {
+//            view = layoutInflater.inflate(R.layout.item_category_dropdown, parent, false)
+//            view.setOnClickListener {
+//                val root = parent.rootView
+//                root.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_DOWN, KeyEvent.KEYCODE_BACK))
+//                root.dispatchKeyEvent(KeyEvent(KeyEvent.ACTION_UP, KeyEvent.KEYCODE_BACK))
+//            }
+//        } else {
+//            view = layoutInflater.inflate(R.layout.item_category_dropdown, parent, false)
+//            getItem(position)?.let { setItemForCountry(view, it) }
+//        }
+
+        view = layoutInflater.inflate(R.layout.item_category_dropdown, parent, false)
+        getItem(position)?.let { setItemForCountry(view, it) }
+
         return view
 
     }
 
     override fun getItem(position: Int): Category? {
-        if (position == 0) {
-            return null
-        }
-        return super.getItem(position - 1)
+//        if (position == 0) {
+//            return null
+//        }
+        return super.getItem(position)
     }
 
-    override fun getCount() = super.getCount() + 1
+    override fun getCount() = super.getCount()
 
     override fun isEnabled(position: Int) = position != 0
 

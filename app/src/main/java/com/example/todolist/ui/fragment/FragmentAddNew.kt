@@ -94,7 +94,8 @@ class FragmentAddNew() : BaseBottomSheetFragment() {
         mBinding.apply {
 
             btnCancel.setOnClickListener {
-                findNavController().navigateUp()
+//                findNavController().navigateUp()
+                dismiss()
 //                Toast.makeText(requireContext(),(catSpinner.selectedItem as Category).title, Toast.LENGTH_LONG).show()
             }
 

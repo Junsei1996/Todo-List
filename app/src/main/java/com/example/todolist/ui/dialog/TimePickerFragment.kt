@@ -11,7 +11,7 @@ import java.util.Calendar
 
 class TimePickerFragment() : DialogFragment(), TimePickerDialog.OnTimeSetListener {
 
-    lateinit var timeListener: DateAndTimeListener
+    private lateinit var timeListener: DateAndTimeListener
 
     constructor(listener:DateAndTimeListener):this(){
         this.timeListener = listener
@@ -28,6 +28,14 @@ class TimePickerFragment() : DialogFragment(), TimePickerDialog.OnTimeSetListene
     }
 
     override fun onTimeSet(view: TimePicker, hourOfDay: Int, minute: Int) {
-        timeListener.onTimeSelected(hourOfDay.toString()+":"+minute.toString())
+        var hour = hourOfDay.toString()
+        if(hourOfDay < 10){
+            hour = "0$hour"
+        }
+        var min = minute.toString()
+        if(minute < 10){
+            min = "0$min"
+        }
+        timeListener.onTimeSelected("$hour:$min")
     }
 }

@@ -15,6 +15,15 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "ADMOB_APP_ID", "\"${ADMOB_APP_ID}\"")
+        buildConfigField("String", "BANNER_AD_UNIT_ID", "\"${BANNER_AD_UNIT_ID}\"")
+        buildConfigField("String", "TEST_AD_UNIT_ID", "\"${TEST_AD_UNIT_ID}\"")
+
+        manifestPlaceholders = [
+                ADMOB_APP_ID: "${ADMOB_APP_ID}"
+        ]
+
     }
 
     buildTypes {
@@ -61,5 +70,7 @@ dependencies {
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
     implementation "com.chauthai.swipereveallayout:swipe-reveal-layout:$rootProject.swipereveallayout_version"
+
+    implementation("com.google.android.gms:play-services-ads:22.0.0")
 
 }
