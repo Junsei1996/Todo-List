@@ -4,10 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.todolist.model.Category
 import com.example.todolist.model.DetailItem
 import com.example.todolist.model.ListParent
 
-@Database(entities = arrayOf(ListParent::class, DetailItem::class), version = 1, exportSchema = false)
+@Database(entities = arrayOf(ListParent::class, DetailItem::class, Category::class), version = 1, exportSchema = false)
 public abstract class TodoDatabase : RoomDatabase() {
 
     abstract fun filesDao() : FilesDao

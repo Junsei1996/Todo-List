@@ -1,4 +1,30 @@
 <resources>
-    <string name="app_name">TodoList</string>
+    <string name="app_name">Todo List</string>
     <string name="add_new_item">Add New Item</string>
+    <string name="all_files">All Files</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="deadline">Deadline</string>
+    <string name="cancel">Cancel</string>
+    <string name="save">Save</string>
+    <string name="number">1</string>
+    <string name="details">Details</string>
+    <string name="mark_as_complete">mark as complete</string>
+    <string name="delete">Delete</string>
+    <string name="no_tasks_found">no tasks found</string>
+    <string name="no_files_found">no files found</string>
+    <string name="history">History</string>
+    <string name="text">Text</string>
+    <string name="date">Date</string>
+    <string name="input_date">Enter Date</string>
+    <string name="enter_time">Enter Time</string>
+    <string name="home">Home</string>
+    <string name="completed">Completed</string>
+    <string name="add_category">+ Add Category</string>
+    <string name="add_new_category">Add New Category</string>
+    <string name="priority">Priority</string>
+    <string name="add_to_archive">Add to Archive</string>
+    <string name="active_tasks">Active Tasks</string>
+    <string name="completed_tasks">Completed Tasks</string>
+    <string name="mark_as_active">Mark as Active</string>
 </resources>

@@ -3,24 +3,36 @@ package com.example.todolist.model
 import android.os.Parcel
 import android.os.Parcelable
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
-import com.example.todolist.util.Enums
 
 
-@Entity(tableName = "files_table")
+@Entity(tableName = "files_table",
+    foreignKeys = arrayOf(
+        ForeignKey(
+            entity = Category::class,
+            parentColumns = arrayOf("id"),
+            childColumns = arrayOf("categoryId"),
+            onDelete = ForeignKey.CASCADE
+        )
+    ))
 data class ListParent(
     @PrimaryKey(autoGenerate = true) var id: Int = 0,
-    var name: String,
-    var description: String,
-    var status: String,
-    var deadline:String
+    var name: String?,
+    var description: String?,
+    var categoryId:Int,
+    var categoryName: String?,
+    var status: String?,
+    var deadline:String?
 ):Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readInt(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString(),
-        parcel.readString().toString()
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readInt(),
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString()
     ) {
     }
 
@@ -28,6 +40,8 @@ data class ListParent(
         parcel.writeInt(id)
         parcel.writeString(name)
         parcel.writeString(description)
+        parcel.writeInt(categoryId)
+        parcel.writeString(categoryName)
         parcel.writeString(status)
         parcel.writeString(deadline)
     }

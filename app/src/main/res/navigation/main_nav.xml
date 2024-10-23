@@ -13,12 +13,16 @@
         >
         <action
             android:id="@+id/action_fragmentHome_to_fragmentAddNew"
-            app:destination="@id/fragmentAddNew" />
+            app:destination="@id/fragmentAddNew"
+            />
         <action
             android:id="@+id/action_fragmentHome_to_fragmentDetails"
             app:destination="@id/fragmentDetails" />
+        <action
+            android:id="@+id/action_fragmentHome_to_fragmentAddCategory"
+            app:destination="@id/fragmentAddCategory" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/fragmentAddNew"
         android:name="com.example.todolist.ui.fragment.FragmentAddNew"
         android:label="FragmentAddNew"
@@ -33,11 +37,26 @@
             android:id="@+id/action_fragmentDetails_to_fragmentAddTask"
             app:destination="@id/fragmentAddTask" />
     </fragment>
-    <fragment
+    <dialog
         android:id="@+id/fragmentAddTask"
         android:name="com.example.todolist.ui.fragment.FragmentAddTask"
         android:label="FragmentAddTask"
         android:layout="@layout/fragment_add_task"
+        />
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.todolist.ui.fragment.FragmentHistory"
+        android:label="HistoryFragment"
+        tools:layout="@layout/fragment_history">
+        <action
+            android:id="@+id/action_historyFragment_to_fragmentDetails"
+            app:destination="@id/fragmentDetails" />
+    </fragment>
+    <dialog
+        android:id="@+id/fragmentAddCategory"
+        android:name="com.example.todolist.ui.fragment.FragmentAddCategory"
+        android:label="FragmentAddCategory"
+        tools:layout="@layout/fragment_add_category"
         />
 
 </navigation>
