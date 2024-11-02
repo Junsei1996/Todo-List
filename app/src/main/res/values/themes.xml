@@ -19,4 +19,9 @@
 
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="BottomNavigationView">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
 </resources>

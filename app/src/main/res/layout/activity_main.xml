@@ -39,17 +39,16 @@
             android:layout_height="wrap_content"
             android:background="@color/white"
             android:shadowColor="@color/black"
-            app:itemIconTint="@color/dark_blue"
-            app:itemTextColor="@color/black"
+            android:theme="@style/BottomNavigationView"
+            app:itemIconTint="@color/bottom_nav_color"
+            app:itemTextColor="@color/bottom_nav_color"
             app:labelVisibilityMode="labeled"
+            android:paddingVertical="5dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
             app:menu="@menu/home_bottom_menu"
-            app:tabIndicatorColor="@color/pink"
-            app:tabMode="fixed"
-            app:tabTextColor="@color/black" />
+            app:tabMode="fixed" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
